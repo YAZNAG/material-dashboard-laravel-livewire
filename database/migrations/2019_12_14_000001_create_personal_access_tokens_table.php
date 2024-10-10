@@ -15,7 +15,9 @@ class CreatePersonalAccessTokensTable extends Migration
     {
         Schema::create('personal_access_tokens', function (Blueprint $table) {
             $table->id();
-            $table->morphs('tokenable');
+            // Modifiez ici pour limiter la longueur de tokenable_type
+            $table->string('tokenable_type', 191); // Limiter à 191 caractères
+            $table->unsignedBigInteger('tokenable_id'); // ID associé
             $table->string('name');
             $table->string('token', 64)->unique();
             $table->text('abilities')->nullable();

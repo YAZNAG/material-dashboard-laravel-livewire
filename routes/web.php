@@ -17,6 +17,7 @@ use App\Http\Livewire\StaticSignUp;
 use App\Http\Livewire\Tables;
 use App\Http\Livewire\VirtualReality;
 use GuzzleHttp\Middleware;
+use App\Http\Controllers\CamionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,4 +55,33 @@ Route::get('virtual-reality', VirtualReality::class)->name('virtual-reality');
 Route::get('static-sign-in', StaticSignIn::class)->name('static-sign-in');
 Route::get('static-sign-up', StaticSignUp::class)->name('static-sign-up');
 Route::get('rtl', RTL::class)->name('rtl');
+
+// Display a listing of the camions
+Route::get('/camions', [CamionController::class, 'index'])->name('camions.index');
+
+// Show the form for creating a new camion
+Route::get('/camions/create', [CamionController::class, 'create'])->name('camions.create');
+
+// Store a newly created camion in storage
+Route::post('/camions', [CamionController::class, 'store'])->name('camions.store');
+
+// Display the specified camion
+Route::get('/camions/{camion}', [CamionController::class, 'show'])->name('camions.show');
+
+// Show the form for editing the specified camion
+Route::get('/camions/{camion}/edit', [CamionController::class, 'edit'])->name('camions.edit');
+
+// Update the specified camion in storage
+Route::put('/camions/{camion}', [CamionController::class, 'update'])->name('camions.update');
+
+// Remove the specified camion from storage
+Route::delete('/camions/{camion}', [CamionController::class, 'destroy'])->name('camions.destroy');
+
+// Optional: Additional custom routes
+// Example: Show images associated with a specific camion
+Route::get('/camions/{camion}/images', [CamionController::class, 'showImages'])->name('camions.images');
+
+// Example: Generate a report for a specific camion
+Route::get('/camions/{camion}/report', [CamionController::class, 'generateReport'])->name('camions.report');
+
 });
