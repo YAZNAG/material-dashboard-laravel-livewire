@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CarteGrise extends Model
+class CartGrise extends Model
 {
     use HasFactory;
 
-    protected $table = 'cart_grise';
-
+     protected $table = 'cart_grise';
     // Fillable attributes for mass assignment
     protected $fillable = [
         'camion_id',         // Foreign key referencing the Camion model

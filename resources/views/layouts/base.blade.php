@@ -65,6 +65,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets') }}/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     @livewireStyles
 </head>
 
@@ -91,6 +93,23 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('assets') }}/js/material-dashboard.min.js?v=3.0.0"></script>
+    <script>
+        function calculateTotal() {
+            // Get values from the inputs
+            const montantPrincipal = parseFloat(document.getElementById('montant_principal').value) || 0;
+            const penalite = parseFloat(document.getElementById('penalite').value) || 0;
+            const majorations = parseFloat(document.getElementById('majorations').value) || 0;
+
+            // Calculate the total
+            const montantTotal = montantPrincipal + penalite + majorations;
+
+            // Set the total in the montant_total input
+            document.getElementById('montant_total').value = montantTotal.toFixed(2);
+        }
+
+        // Initialize the total on page load
+        window.onload = calculateTotal;
+    </script>
     @livewireScripts
 </body>
 

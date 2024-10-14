@@ -18,7 +18,12 @@ use App\Http\Livewire\Tables;
 use App\Http\Livewire\VirtualReality;
 use GuzzleHttp\Middleware;
 use App\Http\Controllers\CamionController;
-
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\AssuranceController;
+use App\Http\Controllers\VisiteController;
+use App\Http\Controllers\TaxeSpecialeAnnuelleController;
+use App\Http\Controllers\CartGriseController;
+use App\Http\Controllers\CartAutorisationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -83,5 +88,35 @@ Route::get('/camions/{camion}/images', [CamionController::class, 'showImages'])-
 
 // Example: Generate a report for a specific camion
 Route::get('/camions/{camion}/report', [CamionController::class, 'generateReport'])->name('camions.report');
+
+
+Route::resource('assurances', AssuranceController::class);
+
+// Routes pour les Cartes Grise
+Route::resource('cartGrise', CartGriseController::class);
+
+// Routes pour les Visites Techniques
+Route::resource('visites', VisiteController::class);
+
+// Routes pour les Cartes d'Autorisation
+Route::resource('cartAutorisation', CartAutorisationController::class);
+
+Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
+
+
+// Route  Taxe Spéciale Annuelle
+Route::get('/taxes/create', [TaxeSpecialeAnnuelleController::class, 'create'])->name('taxes.create');
+Route::post('/taxes', [TaxeSpecialeAnnuelleController::class, 'store'])->name('taxes.store');
+Route::get('/taxes/{id}/edit', [TaxeSpecialeAnnuelleController::class, 'edit'])->name('taxes.edit');
+Route::put('taxes/{id}', [TaxeSpecialeAnnuelleController::class, 'update'])->name('taxes.update');
+Route::delete('taxes/{id}', [TaxeSpecialeAnnuelleController::class, 'destroy'])->name('taxes.destroy');
+
+Route::resource('visites', VisiteController::class);
+
+Route::resource('cartesgrise', CartGriseController::class);
+
+Route::resource('cartesautorisation', CartAutorisationController::class);
+
+
 
 });

@@ -1,4 +1,3 @@
-<!-- resources/views/livewire/camions/index.blade.php -->
 <x-layouts.base>
     <x-navbars.sidebar /> <!-- Sidebar component -->
 
@@ -10,9 +9,10 @@
                 <div class="col-12">
                     <h1 class="text-center mb-4">Liste des Camions</h1>
 
-                    <!-- Button to create a new Camion -->
+                    <!-- Buttons for adding new items -->
                     <div class="mb-4 text-end">
                         <a href="{{ route('camions.create') }}" class="btn btn-primary">Ajouter un Camion</a>
+
                     </div>
 
                     <!-- Camions Table -->
@@ -25,7 +25,7 @@
                                     <th scope="col">Genre</th>
                                     <th scope="col">Type</th>
                                     <th scope="col">Marque</th>
-                                    <th scope="col">type carburant</th>
+                                    <th scope="col">Type Carburant</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -39,12 +39,19 @@
                                         <td>{{ $camion->marque }}</td>
                                         <td>{{ $camion->type_carburant }}</td>
                                         <td>
-                                            <!-- Edit and Delete actions -->
-                                            <a href="{{ route('camions.edit', $camion->id) }}" class="btn btn-warning">Modifier</a>
+                                            <!-- View, Edit, Delete actions -->
+                                            <a href="{{ route('camions.show', $camion->id) }}" class="btn btn-info" title="Voir">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('camions.edit', $camion->id) }}" class="btn btn-warning" title="Modifier">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
                                             <form action="{{ route('camions.destroy', $camion->id) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce camion?')">Supprimer</button>
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce camion?')" title="Supprimer">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>

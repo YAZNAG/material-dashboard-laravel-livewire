@@ -40,7 +40,8 @@
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <x-navbars.navs.auth></x-navbars.navs.auth>
 
-        {{ $slot }}
+        {{ $slot}}
+
 
         <x-footers.auth></x-footers.auth>
     </main>

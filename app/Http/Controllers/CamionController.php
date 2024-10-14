@@ -89,10 +89,25 @@ class CamionController extends Controller
      * @param  Camion  $camion
      * @return \Illuminate\View\View
      */
-    public function show(Camion $camion)
-    {
-        return view('camions.show', compact('camion')); // Return the view for a specific camion
-    }
+   public function show(Camion $camion)
+   {
+       // Charger les images associées au camion
+       $images = $camion->images; // Récupérer les images associées au camion
+
+       // Récupérer les assurances associées au camion
+       $assurances = $camion->assurances; // Assurez-vous que la relation 'assurances' est définie dans le modèle Camion
+
+       // Récupérer les taxes automobiles annuelles associées au camion
+       $taxSpeciales = $camion->taxSpeciales; // Assurez-vous que la relation 'taxSpeciales' est définie dans le modèle Camion
+
+       // Récupérer les visites associées au camion
+       $visites = $camion->visites; // Assurez-vous que la relation 'visites' est définie dans le modèle Camion
+
+       return view('livewire.camions.show', compact('camion', 'images', 'assurances', 'taxSpeciales', 'visites')); // Retourner la vue avec le camion, ses images, ses assurances, ses taxes et ses visites
+   }
+
+
+
 
     /**
      * Show the form for editing the specified camion.

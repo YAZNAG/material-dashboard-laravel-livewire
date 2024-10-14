@@ -14,17 +14,16 @@ class Assurance extends Model
 
     // Fillable attributes for mass assignment
     protected $fillable = [
-        'numero_ordre',           // Order number for the insurance
-        'date_debut',             // Start date of the insurance
-        'date_fin',               // End date of the insurance
-        'montant',                // Amount of the insurance
-        'entreprise_assurence',   // Insurance company
-        'intermediaire',          // Intermediary (optional)
-        'assurence_image',        // Image of the insurance document (optional)
-        'camion_id',              // Foreign key referencing the Camion model
-        'numero_police',          // Policy number (optional)
-    ];
-
+            'camion_id',
+            'numero_police',
+            'montant',
+            'date_debut',
+            'date_fin',
+            'entreprise_assurence',
+            'intermediaire',
+            'assurence_image',
+            'numero_ordre', // Ajouter ici
+        ];
     /**
      * Get the camion associated with the assurance.
      */
