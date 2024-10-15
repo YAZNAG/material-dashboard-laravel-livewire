@@ -64,6 +64,15 @@
                      <span class="nav-link-text ms-1">Documents</span>
                  </a>
              </li>
+<li class="nav-item">
+    <a class="nav-link text-white {{ Route::currentRouteName() == 'chauffeurs.index' ? ' active bg-gradient-primary' : '' }}"
+       href="{{ route('chauffeurs.index') }}">
+        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">directions_car</i> <!-- Icône de voiture ou chauffeur -->
+        </div>
+        <span class="nav-link-text ms-1">Chauffeurs</span>
+    </a>
+</li>
 
             <li class="nav-item">
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "

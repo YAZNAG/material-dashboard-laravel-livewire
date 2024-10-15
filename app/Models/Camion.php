@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,10 +8,8 @@ class Camion extends Model
 {
     use HasFactory;
 
-    // Define the table if it doesn't follow Laravel's naming convention
     protected $table = 'camions';
 
-    // Fillable attributes for mass assignment
     protected $fillable = [
         'matricule',
         'antérieure_matricule',
@@ -32,53 +29,50 @@ class Camion extends Model
         'puissance_fiscale',
     ];
 
-    // Relationships
+    // Relations
 
-    /**
-     * Get the images associated with the camion.
-     */
-    public function images()
-        {
-            return $this->hasMany(Images::class);
-    }
+     public function images()
+       {
+           return $this->hasMany(Images::class);
+       }
 
-    /**
-     * Get the cart grises associated with the camion.
-     */
-    public function cartGrises()
-    {
-        return $this->hasMany(CartGrise::class);
-    }
+       /**
+        * Get the cart grises associated with the camion.
+        */
+       public function cartGrises()
+       {
+           return $this->hasMany(CartGrise::class);
+       }
 
-    /**
-     * Get the cart autorisations associated with the camion.
-     */
-    public function cartAutorisations()
-    {
-        return $this->hasMany(CartAutorisation::class);
-    }
+       /**
+        * Get the cart autorisations associated with the camion.
+        */
+       public function cartAutorisations()
+           {
+               return $this->hasMany(CartAutorisation::class, 'camion_id');
+           }
 
-    /**
-     * Get the assurances associated with the camion.
-     */
-    public function assurances()
-    {
-        return $this->hasMany(Assurance::class);
-    }
+       /**
+        * Get the assurances associated with the camion.
+        */
+       public function assurances()
+       {
+           return $this->hasMany(Assurance::class);
+       }
 
-    /**
-     * Get the special annual taxes associated with the camion.
-     */
-    public function taxesSpecialeAnnuelles()
-    {
-        return $this->hasMany(TaxeSpecialeAnnuel::class);
-    }
+       /**
+        * Get the special annual taxes associated with the camion.
+        */
+       public function taxesSpecialeAnnuelles()
+       {
+           return $this->hasMany(TaxeSpecialeAnnuelle::class);
+       }
 
-    /**
-     * Get the visits associated with the camion.
-     */
-    public function visites()
-    {
-        return $this->hasMany(Visite::class);
-    }
+       /**
+        * Get the visits associated with the camion.
+        */
+       public function visites()
+       {
+           return $this->hasMany(Visite::class);
+       }
 }

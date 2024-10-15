@@ -89,24 +89,14 @@ class CamionController extends Controller
      * @param  Camion  $camion
      * @return \Illuminate\View\View
      */
-   public function show(Camion $camion)
-   {
-       // Charger les images associées au camion
-       $images = $camion->images; // Récupérer les images associées au camion
+  public function show($id)
+     {
+         // Récupérer le camion avec ses relations
+         $camion = Camion::with(['images', 'cartGrises', 'cartAutorisations', 'assurances', 'taxesSpecialeAnnuelles', 'visites'])->findOrFail($id);
 
-       // Récupérer les assurances associées au camion
-       $assurances = $camion->assurances; // Assurez-vous que la relation 'assurances' est définie dans le modèle Camion
-
-       // Récupérer les taxes automobiles annuelles associées au camion
-       $taxSpeciales = $camion->taxSpeciales; // Assurez-vous que la relation 'taxSpeciales' est définie dans le modèle Camion
-
-       // Récupérer les visites associées au camion
-       $visites = $camion->visites; // Assurez-vous que la relation 'visites' est définie dans le modèle Camion
-
-       return view('livewire.camions.show', compact('camion', 'images', 'assurances', 'taxSpeciales', 'visites')); // Retourner la vue avec le camion, ses images, ses assurances, ses taxes et ses visites
-   }
-
-
+         // Retourner la vue avec les détails du camion
+         return view('livewire.camions.show', compact('camion'));
+     }
 
 
     /**
@@ -117,7 +107,7 @@ class CamionController extends Controller
      */
     public function edit(Camion $camion)
     {
-        return view('camions.edit', compact('camion')); // Return the form view for editing a camion
+        return view('livewire.camions.edit', compact('camion')); // Return the form view for editing a camion
     }
 
     /**

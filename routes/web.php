@@ -24,6 +24,8 @@ use App\Http\Controllers\VisiteController;
 use App\Http\Controllers\TaxeSpecialeAnnuelleController;
 use App\Http\Controllers\CartGriseController;
 use App\Http\Controllers\CartAutorisationController;
+use App\Http\Controllers\ChauffeurController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -117,6 +119,14 @@ Route::resource('cartesgrise', CartGriseController::class);
 
 Route::resource('cartesautorisation', CartAutorisationController::class);
 
-
+Route::prefix('chauffeurs')->group(function () {
+    Route::get('/', [ChauffeurController::class, 'index'])->name('chauffeurs.index'); // Liste des chauffeurs
+    Route::get('/create', [ChauffeurController::class, 'create'])->name('chauffeurs.create'); // Formulaire d'ajout
+    Route::post('/', [ChauffeurController::class, 'store'])->name('chauffeurs.store'); // Enregistrer un nouveau chauffeur
+    Route::get('/{id}', [ChauffeurController::class, 'show'])->name('chauffeurs.show'); // Détails d'un chauffeur
+    Route::get('/{id}/edit', [ChauffeurController::class, 'edit'])->name('chauffeurs.edit'); // Formulaire de modification
+    Route::put('/{id}', [ChauffeurController::class, 'update'])->name('chauffeurs.update'); // Mettre à jour un chauffeur
+    Route::delete('/{id}', [ChauffeurController::class, 'destroy'])->name('chauffeurs.destroy'); // Supprimer un chauffeur
+});
 
 });

@@ -24,6 +24,8 @@ class CartAutorisationController extends Controller
             'image_path' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date|after_or_equal:date_debut',
+            'numero_inscription' => 'required|string|max:255', // Validation du numéro d'inscription
+
         ]);
 
         // Store the image if uploaded
@@ -36,6 +38,8 @@ class CartAutorisationController extends Controller
             'image_path' => $imagePath,
             'date_debut' => $request->date_debut,
             'date_fin' => $request->date_fin,
+            'numero_inscription' => $request->numero_inscription, // Sauvegarde du numéro d'inscription
+
         ]);
 
         return redirect()->route('documents.index')->with('success', 'Carte d\'Autorisation ajoutée avec succès.');
@@ -73,6 +77,8 @@ class CartAutorisationController extends Controller
              'date_debut' => 'required|date',
              'date_fin' => 'required|date|after_or_equal:date_debut',
              'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate new image if uploaded
+              'numero_inscription' => 'required|string|max:255', // Validation du numéro d'inscription
+
          ]);
 
          // Handle image upload
@@ -91,6 +97,8 @@ class CartAutorisationController extends Controller
          $autorisation->camion_id = $request->input('camion_id');
          $autorisation->date_debut = $request->input('date_debut');
          $autorisation->date_fin = $request->input('date_fin');
+         $autorisation->numero_inscription = $request->input('numero_inscription'); // Mise à jour du numéro d'inscription
+
          $autorisation->save(); // Save the changes to the database
 
          return redirect()->route('documents.index')->with('success', 'Carte d\'Autorisation mise à jour avec succès.');

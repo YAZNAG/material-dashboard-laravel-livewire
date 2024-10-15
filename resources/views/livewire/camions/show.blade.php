@@ -54,109 +54,293 @@
                             <p><strong>Poids Vide:</strong> {{ $camion->poids_vide }}</p>
                             <p><strong>Type d'Usage:</strong> {{ $camion->type_usage }}</p>
 
-                            <!-- PDF Download Links -->
-                            <div class="mt-3">
-                                @if ($camion->cart_autorisation)
-                                    <a href="{{ asset('storage/' . $camion->cart_autorisation) }}" class="btn btn-info mb-2" download>Télécharger Carte Autorisation</a>
-                                @endif
-                                @if ($camion->cart_grise)
-                                    <a href="{{ asset('storage/' . $camion->cart_grise) }}" class="btn btn-info mb-2" download>Télécharger Carte Grise</a>
-                                @endif
-                            </div>
+
                         </div>
                     </div>
 
                     <!-- Data Section: Assurances, Taxes, etc. -->
-                    <div class="row mt-3">
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Données Associées</h4>
-                                    <ul class="nav nav-tabs nav-tabs-custom" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-bs-toggle="tab" href="#assurances" role="tab">
-                                                Les Assurances
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-bs-toggle="tab" href="#taxes" role="tab">
-                                                Taxes Automobiles Annuelles (T.A.A)
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-bs-toggle="tab" href="#visites" role="tab">
-                                                Les Visites
-                                            </a>
-                                        </li>
-                                    </ul>
+                    <div class="container-fluid py-4">
+                        <h1 class="text-center mb-4">Documents des Camions</h1>
 
-                                    <!-- Tab Contents -->
-                                    <div class="tab-content p-3">
-                                        <!-- Assurances -->
-                                        <div class="tab-pane active" id="assurances" role="tabpanel">
-                                            <table class="table table-striped table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Numéro D'ordre</th>
-                                                        <th>Date Début</th>
-                                                        <th>Date Fin</th>
-                                                        <th>Montant</th>
-                                                        <th>Entreprise Assurance</th>
-                                                        <th>Numéro Police</th>
-                                                        <th>Intermédiaire</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @if ($assurances && $assurances->isNotEmpty())
-                                                        @foreach ($assurances as $assurance)
+                        <!-- Data Section: Assurances, Taxes, etc. -->
+                        <div class="row mt-3">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Données Associées</h4>
+                                        <ul class="nav nav-tabs nav-tabs-custom" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-bs-toggle="tab" href="#assurances" role="tab">Les Assurances</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#taxes" role="tab">Taxes Automobiles Annuelles (T.A.A)</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#visites" role="tab">Les Visites</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#cartes-grises" role="tab">Les cartes grises</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#cartAutorisation" role="tab">Les Cartes d'autorisation</a>
+                                            </li>
+                                        </ul>
+
+                                        <!-- Tab Contents -->
+                                        <div class="tab-content p-3">
+                                            <!-- Assurances -->
+                                            <div class="tab-pane active" id="assurances" role="tabpanel">
+                                                <div class="table-responsive mb-4">
+                                                    <table class="table table-striped table-bordered align-items-center">
+                                                        <thead class="table-light">
                                                             <tr>
-                                                                <td>{{ $assurance->numero_ordre }}</td>
-                                                                <td>{{ $assurance->date_debut }}</td>
-                                                                <td>{{ $assurance->date_fin }}</td>
-                                                                <td>{{ $assurance->montant }}</td>
-                                                                <td>{{ $assurance->entreprise_assurance }}</td>
-                                                                <td>{{ $assurance->numero_police }}</td>
-                                                                <td>{{ $assurance->intermediaire }}</td>
-                                                                <td>
-                                                                    @if ($assurance->assurance_pdf)
-                                                                        <a href="{{ asset('documents/camions/Assurances/' . $assurance->assurance_pdf) }}"
-                                                                           class="btn btn-info" download>Télécharger</a>
-                                                                    @endif
-                                                                    <form action="{{ route('assurance.delete', $assurance->id) }}" method="POST" style="display:inline-block;">
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                        <button type="submit" class="btn btn-danger"
-                                                                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette assurance ?');">
-                                                                            Supprimer
-                                                                        </button>
-                                                                    </form>
-                                                                </td>
+                                                                <th scope="col">Numéro d'ordre</th>
+                                                                <th scope="col">Numéro de Police</th>
+                                                                <th scope="col">Montant</th>
+                                                                <th scope="col">Date Début</th>
+                                                                <th scope="col">Date Fin</th>
+                                                                <th scope="col">Entreprise d'assurance</th>
+                                                                <th scope="col">Intermédiaire</th>
+                                                                <th scope="col">Image</th>
+                                                                <th scope="col">Actions</th>
                                                             </tr>
-                                                        @endforeach
-                                                    @else
-                                                        <tr>
-                                                            <td colspan="8">Aucune assurance disponible.</td>
-                                                        </tr>
-                                                    @endif
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($camion->assurances as $assurance) <!-- Affichage des assurances liées à ce camion -->
+                                                                <tr>
+                                                                    <td>{{ $assurance->numero_ordre }}</td>
+                                                                    <td>{{ $assurance->numero_police }}</td>
+                                                                    <td>{{ $assurance->montant }}</td>
+                                                                    <td>{{ $assurance->date_debut }}</td>
+                                                                    <td>{{ $assurance->date_fin }}</td>
+                                                                    <td>{{ $assurance->entreprise_assurence }}</td>
+                                                                    <td>{{ $assurance->intermediaire }}</td>
+                                                           <td>
+                                                                                                                                                                                            @if ($assurance->assurence_image)
+                                                                                                                                                                                            <a href="{{ Storage::url($assurance->assurence_image) }}" download class="btn btn-success">Télécharger</a>
+                                                                                                                                                                                            @endif
+                                                                                                                                                                                        </td>
+                                                                    <td>
+                                                                        <a href="{{ route('assurances.edit', $assurance->id) }}" class="btn btn-warning">
+                                                                            <i class="material-icons">edit</i>
+                                                                        </a>
+                                                                        <form action="{{ route('assurances.destroy', $assurance->id) }}" method="POST" style="display: inline">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette assurance?')">
+                                                                                <i class="material-icons">delete</i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
 
-                                        <!-- Taxes -->
-                                        <div class="tab-pane" id="taxes" role="tabpanel">
-                                            <!-- Add your taxes table content here -->
-                                        </div>
+                                            <!-- Taxes -->
+                                            <div class="tab-pane" id="taxes" role="tabpanel">
+                                              <table class="table">
+                                                  <thead>
+                                                      <tr>
+                                                          <th>Année</th>
+                                                          <th>Tranche</th>
+                                                          <th>Montant Principal</th>
+                                                          <th>Pénalité</th>
+                                                          <th>Majoration</th>
+                                                          <th>Montant Total</th>
+                                                          <th>Date de Paiement</th>
+                                                          <th>Image</th>
+                                                          <th>Actions</th>
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                      @foreach ($camion->taxesSpecialeAnnuelles as $taxe)
+                                                      <tr>
+                                                          <td>{{ $taxe->annee }}</td>
+                                                          <td>{{ $taxe->trache }}</td>
+                                                          <td>{{ $taxe->montant_principal }}</td>
+                                                          <td>{{ $taxe->penalite }}</td>
+                                                          <td>{{ $taxe->majorations }}</td>
+                                                          <td>{{ $taxe->montant_total }}</td>
+                                                          <td>{{ $taxe->date_paiement }}</td>
+                                                          <td>
+                                                              @if ($taxe->taxe_image)
+                                                              <a href="{{ Storage::url($taxe->taxe_image) }}" download class="btn btn-success">Télécharger</a>
+                                                              @endif
+                                                          </td>
+                                                       <td>
+                                                                                                                              <a href="{{ route('taxes.edit', $taxe->id) }}" class="btn btn-warning">
+                                                                                                                                  <i class="material-icons">edit</i>
+                                                                                                                              </a>
+                                                                                                                              <form action="{{ route('taxes.destroy', $taxe->id) }}" method="POST" style="display: inline">
+                                                                                                                                  @csrf
+                                                                                                                                  @method('DELETE')
+                                                                                                                                  <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette assurance?')">
+                                                                                                                                      <i class="material-icons">delete</i>
+                                                                                                                                  </button>
+                                                                                                                              </form>
+                                                                                                                          </td>
+                                                      </tr>
+                                                      @endforeach
+                                                  </tbody>
+                                              </table>
+                                            </div>
 
-                                        <!-- Visites -->
-                                        <div class="tab-pane" id="visites" role="tabpanel">
-                                            <!-- Add your visits table content here -->
+                                            <!-- Visites -->
+                                            <div class="tab-pane" id="visites" role="tabpanel">
+                                                <div class="table-responsive mb-4">
+                                                    <table class="table table-striped table-bordered align-items-center">
+                                                        <thead class="table-light">
+                                                            <tr>
+                                                                <th scope="col">Type de Visite</th>
+                                                                <th scope="col">Date Début</th>
+                                                                <th scope="col">Date Fin</th>
+                                                                <th scope="col">Numéro d'autorisation</th>
+                                                                <th scope="col">Nom du Centre</th>
+                                                                <th scope="col">Adresse du Centre</th>
+                                                                <th scope="col">Résultat</th>
+                                                                <th scope="col">Image</th>
+                                                                <th scope="col">Actions</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($camion->visites as $visite) <!-- Affichage des visites liées à ce camion -->
+                                                                <tr>
+                                                                    <td>{{ $visite->type }}</td>
+                                                                    <td>{{ $visite->date_debut }}</td>
+                                                                    <td>{{ $visite->date_fin }}</td>
+                                                                    <td>{{ $visite->numero_autorisation }}</td>
+                                                                    <td>{{ $visite->nom_centre }}</td>
+                                                                    <td>{{ $visite->address_centre }}</td>
+                                                                    <td>{{ $visite->resultat }}</td>
+                                                                    <td>
+                                                                        @if ($visite->visite_image)
+                                                                            <a href="{{ Storage::url($visite->visite_image) }}" download class="btn btn-success">
+                                                                                <i class="material-icons">download</i> Télécharger
+                                                                            </a>
+                                                                        @endif
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="{{ route('visites.edit', $visite->id) }}" class="btn btn-warning">
+                                                                            <i class="material-icons">edit</i>
+                                                                        </a>
+                                                                        <form action="{{ route('visites.destroy', $visite->id) }}" method="POST" style="display: inline">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette visite?')">
+                                                                                <i class="material-icons">delete</i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+
+<!-- Cartes Grises -->
+<div class="tab-pane" id="cartes-grises" role="tabpanel">
+    <div class="table-responsive mb-4">
+        <table class="table table-striped table-bordered align-items-center">
+            <thead class="table-light">
+                <tr>
+
+                    <th scope="col">Date de Fin</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($camion->cartGrises ?? [] as $carteGrise) <!-- Affichage des cartes grises liées à ce camion -->
+                    <tr>
+
+                        <td>{{ $carteGrise->date_fin }}</td>
+                        <td>
+                            @if ($carteGrise->image_path)
+                                <a href="{{ Storage::url($carteGrise->image_path) }}" download class="btn btn-success">
+                                    <i class="material-icons">download</i> Télécharger
+                                </a>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ route('cartesgrise.edit', $carteGrise->id) }}" class="btn btn-warning">
+                                <i class="material-icons">edit</i>
+                            </a>
+                            <form action="{{ route('cartesgrise.destroy', $carteGrise->id) }}" method="POST" style="display: inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette carte grise?')">
+                                    <i class="material-icons">delete</i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+ <!-- Cartes d'Autorisation -->
+ <div class="tab-pane" id="cartAutorisation" role="tabpanel">
+     <div class="table-responsive mb-4">
+         <table class="table table-striped table-bordered align-items-center">
+             <thead class="table-light">
+                 <tr>
+                     <th scope="col">Numéro d'Autorisation</th>
+
+                     <th scope="col">Date d'Obtention</th>
+                     <th scope="col">Date d'Expiration</th>
+                     <th scope="col">Image</th>
+                     <th scope="col">Actions</th>
+                 </tr>
+             </thead>
+             <tbody>
+                @foreach ($camion->cartAutorisations as $cartAutorisation)
+                    <tr>
+                        <td>{{ $cartAutorisation->numero_inscription }}</td>
+
+                        <td>{{ $cartAutorisation->date_debut }}</td>
+                        <td>{{ $cartAutorisation->date_fin }}</td>
+                        <td>
+                            @if ($cartAutorisation->image_path)
+                                <a href="{{ Storage::url($cartAutorisation->image_path) }}" download class="btn btn-success">
+                                    <i class="material-icons">download</i> Télécharger
+                                </a>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ route('cartesautorisation.edit', $cartAutorisation->id) }}" class="btn btn-warning">
+                                <i class="material-icons">edit</i>
+                            </a>
+                            <form action="{{ route('cartesautorisation.destroy', $cartAutorisation->id) }}" method="POST" style="display: inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette carte d\'autorisation?')">
+                                    <i class="material-icons">delete</i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+
+             </tbody>
+         </table>
+     </div>
+ </div>
+
+
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

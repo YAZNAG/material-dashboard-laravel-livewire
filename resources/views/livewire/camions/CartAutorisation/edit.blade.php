@@ -29,6 +29,12 @@
                                     </select>
                                 </div>
 
+                                <!-- Numéro d'Inscription -->
+                                <div class="mb-3">
+                                    <label for="numero_inscription" class="form-label">Numéro d'Inscription</label>
+                                    <input type="text" class="form-control" id="numero_inscription" name="numero_inscription" value="{{ old('numero_inscription', $autorisation->numero_inscription) }}" required>
+                                </div>
+
                                 <!-- Current Carte d'Autorisation Image Display -->
                                 <div class="mb-3">
                                     <label class="form-label">Image Actuelle</label>

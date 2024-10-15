@@ -17,7 +17,8 @@ class CartAutorisation extends Model
         'camion_id',      // Foreign key referencing the Camion model
         'image_path',     // Image path for the autorisation
         'date_debut',     // Start date for the autorisation
-        'date_fin',       // Expiration date for the autorisation
+        'date_fin',
+        'numero_inscription',
     ];
 
     /**
