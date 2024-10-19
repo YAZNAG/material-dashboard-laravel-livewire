@@ -25,6 +25,8 @@ use App\Http\Controllers\TaxeSpecialeAnnuelleController;
 use App\Http\Controllers\CartGriseController;
 use App\Http\Controllers\CartAutorisationController;
 use App\Http\Controllers\ChauffeurController;
+use App\Http\Controllers\PermisController;
+use App\Http\Controllers\ContractController;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,14 +121,19 @@ Route::resource('cartesgrise', CartGriseController::class);
 
 Route::resource('cartesautorisation', CartAutorisationController::class);
 
-Route::prefix('chauffeurs')->group(function () {
-    Route::get('/', [ChauffeurController::class, 'index'])->name('chauffeurs.index'); // Liste des chauffeurs
-    Route::get('/create', [ChauffeurController::class, 'create'])->name('chauffeurs.create'); // Formulaire d'ajout
-    Route::post('/', [ChauffeurController::class, 'store'])->name('chauffeurs.store'); // Enregistrer un nouveau chauffeur
-    Route::get('/{id}', [ChauffeurController::class, 'show'])->name('chauffeurs.show'); // Détails d'un chauffeur
-    Route::get('/{id}/edit', [ChauffeurController::class, 'edit'])->name('chauffeurs.edit'); // Formulaire de modification
-    Route::put('/{id}', [ChauffeurController::class, 'update'])->name('chauffeurs.update'); // Mettre à jour un chauffeur
-    Route::delete('/{id}', [ChauffeurController::class, 'destroy'])->name('chauffeurs.destroy'); // Supprimer un chauffeur
-});
+
+Route::resource('chauffeurs', ChauffeurController::class);
+
+
+Route::post('/chauffeurs/{chauffeur}/contrats', [ChauffeurController::class, 'storeContrat'])->name('contrats.store');
+Route::put('/chauffeurs/{chauffeurId}/contrats/{contratsId}', [ChauffeurController::class, 'updateContrat'])->name('contrats.update');
+Route::delete('chauffeurs/{chauffeur}/contrats/{contrat}', [ChauffeurController::class, 'destroyContrat'])->name('contrats.destroy');
+
+Route::post('/chauffeurs/{chauffeur}/permis', [ChauffeurController::class, 'storePermis'])->name('permis.store');
+Route::put('/chauffeurs/{chauffeurId}/permis/{permisId}', [ChauffeurController::class, 'updatePermis'])->name('permis.update');
+Route::delete('chauffeurs/{chauffeur}/permis/{permis}', [ChauffeurController::class, 'destroyPermis'])->name('permis.destroy');
+
 
 });
+
+

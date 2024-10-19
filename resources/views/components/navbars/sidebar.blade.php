@@ -49,8 +49,8 @@
                         <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
                             href="{{ route('camions.index') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="material-icons opacity-10">table_view</i>
-                            </div>
+                                        <i class="material-icons opacity-10">directions_car</i> <!-- Icône de voiture -->
+                                    </div>
                             <span class="nav-link-text ms-1">Gestion des Camion </span>
                         </a>
                     </li>
@@ -68,48 +68,42 @@
     <a class="nav-link text-white {{ Route::currentRouteName() == 'chauffeurs.index' ? ' active bg-gradient-primary' : '' }}"
        href="{{ route('chauffeurs.index') }}">
         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="material-icons opacity-10">directions_car</i> <!-- Icône de voiture ou chauffeur -->
+            <i class="material-icons opacity-10">commute</i>
+
         </div>
+
         <span class="nav-link-text ms-1">Chauffeurs</span>
     </a>
 </li>
+<li class="nav-item">
+    <a class="nav-link text-white {{ Route::currentRouteName() == 'chauffeurs.index' ? ' active bg-gradient-primary' : '' }}"
+       href="{{ route('chauffeurs.index') }}">
+        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">person</i> <!-- Icône de voiture ou chauffeur -->
+        </div>
+        <span class="nav-link-text ms-1">Clients</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-white {{ Route::currentRouteName() == 'chauffeurs.index' ? ' active bg-gradient-primary' : '' }}"
+       href="{{ route('chauffeurs.index') }}">
+        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">directions</i>
 
-            <li class="nav-item">
-                <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                    href="{{ route('tables') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">table_view</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Tables</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ Route::currentRouteName() == 'billing' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('billing') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">receipt_long</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Billing</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ Route::currentRouteName() == 'virtual-reality' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('virtual-reality') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">view_in_ar</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Virtual Reality</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ Route::currentRouteName() == 'rtl' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('rtl') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
-                    </div>
-                    <span class="nav-link-text ms-1">RTL</span>
-                </a>
-            </li>
+        </div>
+        <span class="nav-link-text ms-1">Trajets</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-white {{ Route::currentRouteName() == 'chauffeurs.index' ? ' active bg-gradient-primary' : '' }}"
+       href="{{ route('chauffeurs.index') }}">
+        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">table_view</i>
+         </div>
+        <span class="nav-link-text ms-1">Charges</span>
+    </a>
+</li>
+
             <li class="nav-item">
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'notifications' ? ' active bg-gradient-primary' : '' }}  "
                     href="{{ route('notifications') }}">

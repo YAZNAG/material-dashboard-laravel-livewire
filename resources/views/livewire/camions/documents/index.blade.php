@@ -1,5 +1,4 @@
-tu doit fait comme ce tabeleaux mais en affichant seulement les document lie a
-ce camion
+
 <x-layouts.base>
   <x-navbars.sidebar />
 
