@@ -173,17 +173,13 @@
                                                           <td>{{ \Carbon\Carbon::parse($permisItem->date_delivration)->format('d/m/Y') }}</td>
                                                           <td>{{ \Carbon\Carbon::parse($permisItem->date_fin)->format('d/m/Y') }}</td>
                                                           <td>
-<a href="javascript:void(0);" class="btn btn-warning btn-sm" onclick="toggleDiv('updatePermis')">Modifier</a>
+                                                                  <a href="javascript:void(0);" class="btn btn-warning btn-sm" onclick="toggleDiv('updatePermis')">Modifier</a>
 
                                                                   <form action="{{ route('permis.destroy', ['chauffeur' => $chauffeur->id, 'permis' => $permisItem->id]) }}" method="POST" style="display: inline;">
                                                                       @csrf
                                                                       @method('DELETE')
                                                                       <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce permis ?')">Supprimer</button>
                                                                   </form>
-
-
-
-
                                                           </td>
                                                       </tr>
                                                   @endforeach

@@ -76,14 +76,15 @@
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link text-white {{ Route::currentRouteName() == 'chauffeurs.index' ? ' active bg-gradient-primary' : '' }}"
-       href="{{ route('chauffeurs.index') }}">
+    <a class="nav-link text-white {{ Route::currentRouteName() == 'clients.index' ? ' active bg-gradient-primary' : '' }}"
+       href="{{ route('clients.index') }}">
         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="material-icons opacity-10">person</i> <!-- Icône de voiture ou chauffeur -->
+            <i class="material-icons opacity-10">person</i> <!-- Icône de personne pour client -->
         </div>
         <span class="nav-link-text ms-1">Clients</span>
     </a>
 </li>
+
 <li class="nav-item">
     <a class="nav-link text-white {{ Route::currentRouteName() == 'chauffeurs.index' ? ' active bg-gradient-primary' : '' }}"
        href="{{ route('chauffeurs.index') }}">

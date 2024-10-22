@@ -27,6 +27,7 @@ use App\Http\Controllers\CartAutorisationController;
 use App\Http\Controllers\ChauffeurController;
 use App\Http\Controllers\PermisController;
 use App\Http\Controllers\ContractController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -133,6 +134,13 @@ Route::post('/chauffeurs/{chauffeur}/permis', [ChauffeurController::class, 'stor
 Route::put('/chauffeurs/{chauffeurId}/permis/{permisId}', [ChauffeurController::class, 'updatePermis'])->name('permis.update');
 Route::delete('chauffeurs/{chauffeur}/permis/{permis}', [ChauffeurController::class, 'destroyPermis'])->name('permis.destroy');
 
+
+Route::resource('clients', ClientController::class);
+
+Route::post('/clients/{client}/contrats', [ClientController::class, 'storeContratsClients'])
+     ->name('clients.storeContratsClients');
+Route::put('/clients/{client}/contrats/{contrat}', [ClientController::class, 'updateContratsClients'])->name('clients.updateContratsClients');
+Route::delete('/clients/{clientId}/contrats/{contratId}', [ClientController::class, 'deleteContratsClients'])->name('clients.deleteContratsClients');
 
 });
 
