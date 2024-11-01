@@ -27,6 +27,8 @@ class Camion extends Model
         'type_usage',
         'poids_vide',
         'puissance_fiscale',
+        'totalKilometrage',
+        'kilometrageApresDernierVidange',
     ];
 
     // Relations
@@ -75,4 +77,12 @@ class Camion extends Model
        {
            return $this->hasMany(Visite::class);
        }
+
+       public function necessiteVidange()
+           {
+               // Par exemple, on suppose qu'une vidange est nécessaire tous les 10 000 km
+               $seuilVidange = 10000;
+
+               return $this->kilometrageApresDernierVidange >= $seuilVidange;
+           }
 }
